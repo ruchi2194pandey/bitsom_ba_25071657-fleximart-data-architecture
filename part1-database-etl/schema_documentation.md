@@ -1,104 +1,91 @@
 # FlexiMart Database Schema Documentation
 
-## Entity-Relationship Description
+## 1. Entity Relationship Overview
 
-### ENTITY: customers
-Purpose: Stores customer personal and registration details.
+The FlexiMart transactional database consists of four core entities:
 
-Attributes:
-- customer_id: Unique identifier (Primary Key)
-- first_name: Customer's first name
-- last_name: Customer's last name
-- email: Unique email address
-- phone: Contact number
-- city: Customer city
-- registration_date: Date of registration
+- Customers
+- Products
+- Orders
+- Order_Items
 
-Relationships:
-- One customer can place MANY orders (1:M with orders)
+A customer can place multiple orders (one-to-many).  
+Each order can contain multiple products, resolved using the Order_Items table (many-to-many).
 
 ---
 
-### ENTITY: products
-Purpose: Stores product catalog information.
+## 2. Table Descriptions
 
-Attributes:
-- product_id: Unique identifier (Primary Key)
-- product_name: Name of product
-- category: Product category
-- price: Unit price
-- stock_quantity: Available inventory
-
-Relationships:
-- One product can appear in MANY order_items (1:M)
-
----
-
-### ENTITY: orders
-Purpose: Stores customer purchase transactions.
-
-Attributes:
-- order_id: Unique identifier (Primary Key)
-- customer_id: References customers.customer_id
-- order_date: Date of order
-- total_amount: Total order value
-- status: Order status
-
-Relationships:
-- One order belongs to ONE customer (M:1)
-- One order has MANY order_items (1:M)
+### Customers
+| Column | Description |
+|------|------------|
+| customer_id (PK) | Unique customer identifier |
+| first_name | Customer first name |
+| last_name | Customer last name |
+| email | Unique email address |
+| phone | Standardized phone number |
+| city | Customer city |
+| registration_date | Date of registration |
 
 ---
 
-### ENTITY: order_items
-Purpose: Stores line-item details of orders.
-
-Attributes:
-- order_item_id: Unique identifier (Primary Key)
-- order_id: References orders.order_id
-- product_id: References products.product_id
-- quantity: Units purchased
-- unit_price: Price per unit
-- subtotal: quantity × unit_price
+### Products
+| Column | Description |
+|------|------------|
+| product_id (PK) | Unique product identifier |
+| product_name | Name of the product |
+| category | Product category |
+| price | Unit price |
+| stock_quantity | Available stock |
 
 ---
 
-## Normalization Explanation (3NF)
-
-The FlexiMart database is designed following Third Normal Form (3NF) principles. Each table represents a single entity, and all attributes depend solely on the primary key of that table. There are no repeating groups or multi-valued attributes, satisfying First Normal Form (1NF). Second Normal Form (2NF) is achieved because all non-key attributes are fully functionally dependent on the entire primary key; there are no partial dependencies since surrogate keys are used.
-
-Third Normal Form is ensured by eliminating transitive dependencies. For example, customer city information is stored only in the customers table and not duplicated in orders. Product pricing and category details are maintained only in the products table. This separation prevents update anomalies (changing product price in one place), insertion anomalies (adding new products without orders), and deletion anomalies (removing orders without losing product data).
-
-Functional dependencies include:
-- customer_id → customer attributes
-- product_id → product attributes
-- order_id → order attributes
-- order_item_id → quantity, price, subtotal
-
-This design ensures data integrity, consistency, and scalability.
+### Orders
+| Column | Description |
+|------|------------|
+| order_id (PK) | Unique order identifier |
+| customer_id (FK) | Reference to customers |
+| order_date | Date of order |
+| total_amount | Total order value |
 
 ---
 
-## Sample Data Representation
+### Order_Items
+| Column | Description |
+|------|------------|
+| order_item_id (PK) | Unique row identifier |
+| order_id (FK) | Reference to orders |
+| product_id (FK) | Reference to products |
+| quantity | Quantity purchased |
+| unit_price | Price per unit |
+| subtotal | quantity × unit_price |
 
-### customers
-| customer_id | first_name | last_name | email              | city     |
-|------------|------------|-----------|-------------------|----------|
-| 1          | Rahul      | Sharma    | rahul@gmail.com   | Delhi    |
-| 2          | Anita      | Verma     | anita@gmail.com   | Mumbai  |
+---
 
-### products
-| product_id | product_name | category     | price |
-|-----------|--------------|--------------|-------|
-| 1         | Laptop       | Electronics  | 55000 |
-| 2         | Headphones   | Electronics  | 3000  |
+## 3. Normalization (3NF Explanation)
 
-### orders
-| order_id | customer_id | order_date | total_amount |
-|---------|-------------|------------|--------------|
-| 101     | 1           | 2024-03-15 | 58000        |
+The schema follows Third Normal Form (3NF). Each table contains atomic attributes, ensuring First Normal Form (1NF). Partial dependencies are removed by separating order and product details into the Order_Items table, satisfying Second Normal Form (2NF). There are no transitive dependencies; non-key attributes depend only on the primary key of their respective tables. For example, customer contact information is stored only in the Customers table and not duplicated in Orders. This structure reduces redundancy, improves data integrity, and ensures efficient updates, making the database scalable and maintainable.
 
-### order_items
-| order_item_id | order_id | product_id | quantity | subtotal |
-|--------------|----------|------------|----------|----------|
-| 1            | 101      | 1          | 1        | 55000    |
+---
+
+## 4. Sample Records
+
+### Customers
+| customer_id | first_name | last_name | email |
+|------------|-----------|-----------|-------|
+| 1 | Rahul | Sharma | rahul@gmail.com |
+
+### Products
+| product_id | product_name | category | price |
+|-----------|-------------|----------|-------|
+| 101 | iPhone 14 | Electronics | 69999 |
+
+### Orders
+| order_id | customer_id | total_amount |
+|---------|-------------|--------------|
+| 9001 | 1 | 69999 |
+
+### Order_Items
+| order_item_id | order_id | product_id | quantity |
+|--------------|----------|------------|----------|
+| 1 | 9001 | 101 | 1 |

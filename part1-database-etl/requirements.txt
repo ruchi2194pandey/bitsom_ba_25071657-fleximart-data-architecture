@@ -1,5 +1,4 @@
 pandas
 numpy
-sqlalchemy
-cryptography
-pymysql
+mysql-connector-python
+python-dateutil

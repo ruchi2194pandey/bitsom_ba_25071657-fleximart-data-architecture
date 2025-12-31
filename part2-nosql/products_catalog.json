@@ -1,0 +1,88 @@
+[
+  {
+    "product_id": "ELEC001",
+    "name": "Samsung Smart TV",
+    "category": "Electronics",
+    "price": 45000,
+    "stock": 25,
+    "brand": "Samsung",
+    "specifications": {
+      "screen_size": "43 inch",
+      "resolution": "4K",
+      "connectivity": ["HDMI", "USB", "WiFi"]
+    },
+    "reviews": [
+      {
+        "user": "U101",
+        "rating": 4,
+        "comment": "Good picture quality",
+        "review_date": "2024-05-10"
+      },
+      {
+        "user": "U102",
+        "rating": 5,
+        "comment": "Excellent value for money",
+        "review_date": "2024-06-01"
+      }
+    ]
+  },
+  {
+    "product_id": "ELEC002",
+    "name": "Apple iPhone 14",
+    "category": "Electronics",
+    "price": 72000,
+    "stock": 15,
+    "brand": "Apple",
+    "specifications": {
+      "storage": "128GB",
+      "camera": "12MP",
+      "battery": "3279mAh"
+    },
+    "reviews": [
+      {
+        "user": "U201",
+        "rating": 5,
+        "comment": "Premium experience",
+        "review_date": "2024-07-12"
+      }
+    ]
+  },
+  {
+    "product_id": "HOME001",
+    "name": "Philips Mixer Grinder",
+    "category": "Home Appliances",
+    "price": 4200,
+    "stock": 40,
+    "brand": "Philips",
+    "specifications": {
+      "power": "750W",
+      "jars": 3
+    },
+    "reviews": [
+      {
+        "user": "U301",
+        "rating": 4,
+        "comment": "Very useful for daily cooking",
+        "review_date": "2024-04-20"
+      }
+    ]
+  },
+  {
+    "product_id": "FASH001",
+    "name": "Men Cotton Shirt",
+    "category": "Fashion",
+    "price": 1499,
+    "stock": 100,
+    "brand": "Levis",
+    "size_options": ["S", "M", "L", "XL"],
+    "color_options": ["Blue", "White", "Black"],
+    "reviews": [
+      {
+        "user": "U401",
+        "rating": 3,
+        "comment": "Fabric quality is average",
+        "review_date": "2024-03-15"
+      }
+    ]
+  }
+]

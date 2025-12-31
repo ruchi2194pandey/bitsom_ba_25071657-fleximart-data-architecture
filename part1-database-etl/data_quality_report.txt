@@ -1,0 +1,29 @@
+FlexiMart Data Quality Report
+=============================
+
+File: customers_raw.csv
+-----------------------
+Total records read           : 26
+Duplicate records removed    : 2
+Missing emails handled       : 5 (records dropped)
+Phone numbers standardized   : 19
+Records loaded successfully  : 19
+
+File: products_raw.csv
+----------------------
+Total records read           : 20
+Malformed rows corrected     : 20 (column split applied)
+Missing prices handled       : 3 (records dropped)
+Missing stock filled         : 5 (default 0)
+Category values standardized : 20
+Records loaded successfully  : 17
+
+File: sales_raw.csv
+-------------------
+Total records read           : 41
+Duplicate transactions removed: 4
+Missing customer/product IDs : 5 (records dropped)
+Date formats standardized    : 36
+Records loaded successfully  : 32
+
+Overall ETL Status: SUCCESS
