@@ -1,11 +1,11 @@
 
----
+-----
 # Part 2 – NoSQL Database (MongoDB)
 
 ## Objective
 This part evaluates the suitability of MongoDB for handling FlexiMart’s diverse and evolving product catalog and implements basic MongoDB operations on product data.
 
----
+-----
 
 ## Tasks Completed
 
